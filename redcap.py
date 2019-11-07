@@ -1,18 +1,12 @@
 import json
 from collections import defaultdict
 
-import numpy
-import pandas
 from d3b_utils.requests_retry import Session
 
 
-def _clean(df):
-    return df.replace(numpy.nan, "").astype(str)
-
-
-def _default_to_regular(d):
+def _undefault_dict(d):
     if isinstance(d, defaultdict):
-        d = {k: _default_to_regular(v) for k, v in d.items()}
+        d = {k: _undefault_dict(v) for k, v in d.items()}
     return d
 
 
@@ -63,13 +57,24 @@ class RedcapStudy:
             store[instrument]["fields"][field_name] = m
             store[instrument]["events"] = set()
 
-        store = _default_to_regular(store)
+        store = _undefault_dict(store)
         for form in self._get_json("formEventMapping"):
             store[form["form"]]["events"].add(form["unique_event_name"])
 
         return store
 
     def get_selector_choice_map(self):
+        """
+        Returns a map for every field that needs translation from index to
+        value:
+        {
+            <field_name>: {
+                <index>: <value>,
+                ...
+            },
+            ...
+        }
+        """
         store = dict()
         forms = set()
         for m in self._get_json("metadata"):
@@ -123,6 +128,24 @@ class RedcapStudy:
         )
 
     def get_records_tree(self):
+        """Returns all data from the study in the nested form:
+        {
+            <event_name>: {            # event data
+                <instrument_name>: {   # instrument data
+                    <record_id>: {     # subject data for this event+instrument
+                        <instance>: {  # subject event+instrument instance
+                            <field>: set(), # field values
+                            ...
+                        },
+                        ...
+                    },
+                    ...
+                },
+                ...
+            },
+            ...
+        }
+        """
         selector_map = self.get_selector_choice_map()
 
         store = defaultdict(  # events
@@ -171,46 +194,4 @@ class RedcapStudy:
             if field != "study_id":
                 store[event][instrument][subject][instance][field].add(value)
 
-        return _default_to_regular(store)
-
-
-def to_df(instrument):
-    acc = []
-    for p, es in instrument.items():
-        for i, e in es.items():
-            thing = {"subject": p, "instance": i}
-            for k, v in e.items():
-                thing[k] = "+".join(sorted(v))
-            acc.append(thing)
-
-    return _clean(pandas.DataFrame.from_records(acc))
-
-
-def df_link(left, right, left_on, right_on):
-    return _clean(
-        left.merge(
-            right,
-            how="left",
-            left_on=["subject", left_on],
-            right_on=["subject", right_on],
-        )
-        .sort_values(by=["subject", left_on])
-        .set_index("subject")
-        .reset_index()
-    )
-
-
-def new_column_from_linked(
-    left, right, left_on, right_on, new_col, from_cols, separator
-):
-    df = df_link(left, right, left_on, right_on)
-
-    nc = None
-    for c in from_cols:
-        if nc is None:
-            nc = df[c]
-        else:
-            nc = nc + separator + df[c]
-    df[new_col] = nc.replace(f"^{separator}{separator}$", "", regex=True)
-
-    return df[[new_col] + list(left.columns)]
+        return _undefault_dict(store)
