@@ -1,2 +1,3 @@
-# d3b-redcap-api-python
-REDCap API interface in Python
+# REDCap API interface in Python
+
+Supports structured data extraction for REDCap projects
