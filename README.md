@@ -1,4 +1,4 @@
-# REDCap API interface in Python
+# REDCap API in Python
 
 Supports structured data extraction for REDCap projects
 
