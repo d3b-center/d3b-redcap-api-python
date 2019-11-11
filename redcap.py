@@ -49,7 +49,6 @@ class REDCapStudy:
             all_params["data"] = json.dumps(all_params["data"])
         all_params = {k: v for k, v in all_params.items() if v is not None}
         resp = Session().post(self.api, data=all_params, **kwargs)
-        breakpoint()
         if resp.status_code != 200:
             raise REDCapError(f"HTTP {resp.status_code} - {resp.text}")
         return resp
