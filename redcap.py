@@ -294,7 +294,7 @@ class REDCapStudy:
         store = defaultdict(  # forms
             lambda: defaultdict(dict)  # events and fields
         )
-        for m in self.get_metadata():
+        for m in self.get_data_dictionary():
             instrument = m.pop("form_name")
             field_name = m.pop("field_name")
             store[instrument]["fields"][field_name] = m
@@ -392,7 +392,7 @@ class REDCapStudy:
         """
         store = dict()
         forms = set()
-        for m in self.get_metadata():
+        for m in self.get_data_dictionary():
             forms.add(m["form_name"])
             if m["field_type"] in {"dropdown", "radio", "checkbox"}:
                 store[m["field_name"]] = {
@@ -445,7 +445,7 @@ class REDCapStudy:
         )
 
         field_instruments = {
-            m["field_name"]: m["form_name"] for m in self.get_metadata()
+            m["field_name"]: m["form_name"] for m in self.get_data_dictionary()
         }
         event_forms = defaultdict(set)
         for form in self._get_json("formEventMapping"):
