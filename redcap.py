@@ -15,16 +15,14 @@ class REDCapError(Exception):
     pass
 
 
+# Note to future developers: This class uses get_ and set_ methods on purpose
+# to control the user experience. Please don't replace them with property
+# decorators. It needs to be completely unambiguous without inspecting the
+# implementation that the data is somewhere else and that setting anything
+# has serious consequences. This is an interface for manipulating REDCap with
+# project administrative privilege, not just not just some data container.
+# - Avi
 class REDCapStudy:
-    """
-    Note to future developers: This class uses get_ and set_ methods on purpose
-    to control the user experience. Please don't replace them with property
-    decorators. It needs to be completely unambiguous without inspecting the
-    implementation that the data is somewhere else and that setting anything
-    has serious consequences. This is an interface for manipulating REDCap with
-    project administrative privilege, not just not just some data container.
-    - Avi
-    """
 
     def __init__(self, api_url, api_token):
         self.api = api_url
@@ -444,9 +442,14 @@ class REDCapStudy:
             )
         )
 
-        field_instruments = {
+        field_forms = {
             m["field_name"]: m["form_name"] for m in self.get_data_dictionary()
         }
+        # "<instrument>_complete" fields are not considered part of the
+        # instruments, so include them specially
+        for inst in set(field_forms.values()):
+            field_forms[f"{inst}_complete"] = inst
+
         event_forms = defaultdict(set)
         for form in self._get_json("formEventMapping"):
             event_forms[form["unique_event_name"]].add(form["form"])
@@ -468,6 +471,8 @@ class REDCapStudy:
         # the records API doesn't report the instrument name for records that
         # come from instruments that aren't repeating.
 
+        errors = defaultdict(list)
+
         for r in self.get_records(
             type="eav",
             raw=True,
@@ -477,30 +482,44 @@ class REDCapStudy:
             data_access_groups=True,
         ):
             event = r["redcap_event_name"]
-            if event not in event_forms:  # obsolete
-                continue
             subject = r["record"]
             field = r["field_name"]
             value = r["value"]
+            form = field_forms.get(field)
+
+            def record_error(what):
+                errors[what].append({
+                    "event": event, "subject": subject, "field": field,
+                    "value": value, "form": form
+                })
+
+            if event not in event_forms:  # obsolete
+                record_error("event is missing")
+                continue
+
+            mapped_value = value
             if field in selector_map:
-                value = selector_map[field][value]
+                if value not in selector_map[field]:  # obsolete
+                    if value in selector_map[field].values():
+                        record_error("choice value as text")
+                    else:
+                        record_error("choice value is missing")
+                    continue
+                mapped_value = selector_map[field][value]
 
-            instrument = field_instruments.get(field)
-            if not instrument:
-                # "<instrument>_complete" fields are not considered part of the
-                # instruments, so check for them separately
-                for f in event_forms[event]:
-                    if field == f"{f}_complete":
-                        instrument = f
-                        break
+            if field not in field_forms:  # obsolete
+                record_error("field not in a form")
+                continue
 
-            if instrument not in event_forms[event]:  # obsolete
+            if form not in event_forms[event]:  # obsolete
+                record_error("form not in given event")
                 continue
 
             # The API will return 1, '2', for repeat instances.
             # Note that 1 was an int and 2 was a str.
             instance = str(r.get("redcap_repeat_instance") or "1")
             if field != "study_id":
-                store[event][instrument][subject][instance][field].add(value)
+                store[event][form][subject][instance][field].add(mapped_value)
 
-        return _undefault_dict(store)
+
+        return _undefault_dict(store), _undefault_dict(errors)
