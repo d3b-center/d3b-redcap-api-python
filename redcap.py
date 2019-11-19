@@ -299,11 +299,8 @@ class REDCapStudy:
             store[instrument]["events"] = set()
 
         store = _undefault_dict(store)
-        try:
-            for form in self.get_instrument_event_mappings():
-                store[form["form"]]["events"].add(form["unique_event_name"])
-        except RedcapError:
-            pass
+        for form in self.get_instrument_event_mappings():
+            store[form["form"]]["events"].add(form["unique_event_name"])
 
         return store
 
