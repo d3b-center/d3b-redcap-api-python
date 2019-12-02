@@ -23,7 +23,6 @@ class REDCapError(Exception):
 # project administrative privilege, not just not just some data container.
 # - Avi
 class REDCapStudy:
-
     def __init__(self, api_url, api_token):
         self.api = api_url
         self.api_token = api_token
@@ -210,9 +209,7 @@ class REDCapStudy:
         """Set basic project attributes such as title, logitudinality,
         if surveys are enabled, creation time, etc."""
         # https://redcap.chop.edu/api/help/?content=imp_proj_sett
-        return self._get_json(
-            "project_settings", params={"data": project_info}
-        )
+        return self._get_json("project_settings", params={"data": project_info})
 
     def get_project_xml(
         self,
@@ -485,10 +482,15 @@ class REDCapStudy:
             form = field_forms.get(field)
 
             def record_error(what):
-                errors[what].append({
-                    "event": event, "subject": subject, "field": field,
-                    "value": value, "form": form
-                })
+                errors[what].append(
+                    {
+                        "event": event,
+                        "subject": subject,
+                        "field": field,
+                        "value": value,
+                        "form": form,
+                    }
+                )
 
             if event not in event_forms:  # obsolete
                 record_error("event is missing")
@@ -517,6 +519,5 @@ class REDCapStudy:
             instance = str(r.get("redcap_repeat_instance") or "1")
             if field != "study_id":
                 store[event][form][subject][instance][field].add(mapped_value)
-
 
         return _undefault_dict(store), _undefault_dict(errors)
