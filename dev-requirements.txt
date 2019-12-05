@@ -1,0 +1,4 @@
+pytest
+deepdiff
+jsonpickle
+-r requirements.txt
