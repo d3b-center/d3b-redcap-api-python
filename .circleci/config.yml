@@ -14,5 +14,6 @@ jobs:
             source venv/bin/activate
             pip install black
             black --check --line-length 80 */*.py
-            pip install -r requirements.txt
+            pip install -r dev-requirements.txt
+            pip install -e .
             pytest tests
