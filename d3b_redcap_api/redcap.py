@@ -326,7 +326,7 @@ class REDCapStudy:
         survey_fields=True,
         data_access_groups=True,
     ):
-        return self._records_getter(
+        records = self._records_getter(
             "record",
             raw=raw,
             raw_headers=raw_headers,
@@ -339,10 +339,12 @@ class REDCapStudy:
                 else "false",
             },
         )
+        return [r for r in records if r["field_name"] != "study_id"]
 
     def set_records(
         self, records, type="eav", overwrite=False, auto_number=False
     ):
+        records = [r for r in records if r["field_name"] != "study_id"]
         args = {
             "type": type,
             "data": records,
@@ -352,6 +354,14 @@ class REDCapStudy:
         if auto_number:
             args["returnContent"] = "auto_ids"
         self._get_json("record", params=args)
+
+    def delete_records(self, record_name_list, arm=None):
+        args = {"action": "delete"}
+        for i, r in enumerate(record_name_list):
+            args[f"records[{i}]"] = r
+        if arm is not None:
+            args["arm"] = arm
+        self._get_json("record", args)
 
     def get_repeating_forms_events(self):
         self._get_json("repeatingFormsEvents")
