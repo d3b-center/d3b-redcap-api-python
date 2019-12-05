@@ -1,26 +1,10 @@
 [
     {
-        "field_name": "diagnosis_complete",
+        "field_name": "demographics_complete",
         "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "2"
-    },
-    {
-        "field_name": "tumor_or_molecular_tests",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "2"
-    },
-    {
-        "field_name": "enrollment_type",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
+        "redcap_event_name": "demographics_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
         "value": "2"
     },
     {
@@ -32,36 +16,132 @@
         "value": "0"
     },
     {
-        "field_name": "only_specimen_id",
-        "record": "2",
-        "redcap_event_name": "specimens_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "specimen",
-        "value": "1234567890"
-    },
-    {
-        "field_name": "path_test_avail",
+        "field_name": "race",
         "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "0"
+        "redcap_event_name": "demographics_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "7"
     },
     {
-        "field_name": "institution",
+        "field_name": "subject_ethnicity",
+        "record": "1",
+        "redcap_event_name": "demographics_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "3"
+    },
+    {
+        "field_name": "demographics_complete",
         "record": "2",
-        "redcap_event_name": "enrollment_arm_1",
+        "redcap_event_name": "demographics_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "2"
+    },
+    {
+        "field_name": "gender",
+        "record": "2",
+        "redcap_event_name": "demographics_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
         "value": "1"
     },
     {
-        "field_name": "results_available",
-        "record": "3",
-        "redcap_event_name": "medical_history_arm_1",
+        "field_name": "race",
+        "record": "2",
+        "redcap_event_name": "demographics_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "0"
+        "value": "3"
+    },
+    {
+        "field_name": "subject_ethnicity",
+        "record": "2",
+        "redcap_event_name": "demographics_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "2"
+    },
+    {
+        "field_name": "demographics_complete",
+        "record": "3",
+        "redcap_event_name": "demographics_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "2"
+    },
+    {
+        "field_name": "gender",
+        "record": "3",
+        "redcap_event_name": "demographics_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "1"
+    },
+    {
+        "field_name": "race",
+        "record": "3",
+        "redcap_event_name": "demographics_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "1"
+    },
+    {
+        "field_name": "subject_ethnicity",
+        "record": "3",
+        "redcap_event_name": "demographics_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "1"
+    },
+    {
+        "field_name": "clinical_status_at_diagnosis",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "1"
+    },
+    {
+        "field_name": "date_of_initial_diagnosis",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "2019-10-04"
+    },
+    {
+        "field_name": "diagnosis_complete",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "2"
+    },
+    {
+        "field_name": "diagnosis_type",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "5"
+    },
+    {
+        "field_name": "enrollment_type",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "2"
+    },
+    {
+        "field_name": "init_path_diag",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "1"
     },
     {
         "field_name": "metas_at_init_diag",
@@ -72,48 +152,8 @@
         "value": "1"
     },
     {
-        "field_name": "predispositions_complete",
-        "record": "2",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "2"
-    },
-    {
-        "field_name": "first_name",
-        "record": "3",
-        "redcap_event_name": "enrollment_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "Judy"
-    },
-    {
-        "field_name": "dob",
-        "record": "2",
-        "redcap_event_name": "enrollment_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "2019-10-29"
-    },
-    {
-        "field_name": "canc_predisp_condition",
-        "record": "2",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "7"
-    },
-    {
-        "field_name": "init_path_diag",
-        "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "1"
-    },
-    {
         "field_name": "other_med_condition",
-        "record": "2",
+        "record": "1",
         "redcap_event_name": "diagnoses_arm_1",
         "redcap_repeat_instance": 1,
         "redcap_repeat_instrument": "diagnosis",
@@ -128,20 +168,140 @@
         "value": "None"
     },
     {
-        "field_name": "predispositions_complete",
-        "record": "3",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
+        "field_name": "path_test_avail",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
         "value": "0"
     },
     {
-        "field_name": "family_member",
+        "field_name": "tumor_or_molecular_tests",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "2"
+    },
+    {
+        "field_name": "tumor_primary_location_in",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "1"
+    },
+    {
+        "field_name": "date_of_visit_follow_up",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "update",
+        "value": "2019-11-06"
+    },
+    {
+        "field_name": "type_of_update",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "update",
+        "value": "2"
+    },
+    {
+        "field_name": "update_complete",
+        "record": "1",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "update",
+        "value": "0"
+    },
+    {
+        "field_name": "clinical_status_at_diagnosis",
         "record": "2",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "7"
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "1"
+    },
+    {
+        "field_name": "date_of_initial_diagnosis",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "2019-11-11"
+    },
+    {
+        "field_name": "diagnosis_complete",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "2"
+    },
+    {
+        "field_name": "diagnosis_type",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "5"
+    },
+    {
+        "field_name": "enrollment_type",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "2"
+    },
+    {
+        "field_name": "init_path_diag",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "1"
+    },
+    {
+        "field_name": "metas_at_init_diag",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "1"
+    },
+    {
+        "field_name": "other_med_condition",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "1"
+    },
+    {
+        "field_name": "other_med_condition",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "3"
+    },
+    {
+        "field_name": "path_diag",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "Grade IV"
+    },
+    {
+        "field_name": "tumor_or_molecular_tests",
+        "record": "2",
+        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "diagnosis",
+        "value": "6"
     },
     {
         "field_name": "tumor_primary_location_in",
@@ -160,100 +320,60 @@
         "value": "2019-10-04"
     },
     {
-        "field_name": "clinical_status_at_diagnosis",
+        "field_name": "enrollment_complete",
         "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "1"
-    },
-    {
-        "field_name": "race",
-        "record": "1",
-        "redcap_event_name": "demographics_arm_1",
+        "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "7"
+        "value": "2"
     },
     {
-        "field_name": "other_med_condition",
-        "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "3"
+        "field_name": "first_name",
+        "record": "1",
+        "redcap_event_name": "enrollment_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "John"
+    },
+    {
+        "field_name": "institution",
+        "record": "1",
+        "redcap_event_name": "enrollment_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "1"
     },
     {
         "field_name": "last_name",
-        "record": "3",
+        "record": "1",
         "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "Eliza"
+        "value": "Doe"
     },
     {
-        "field_name": "family_history",
-        "record": "2",
-        "redcap_event_name": "medical_history_arm_1",
+        "field_name": "mrn",
+        "record": "1",
+        "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "0"
+        "value": "MRN1234567890"
     },
     {
-        "field_name": "path_diag",
+        "field_name": "dob",
         "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "Grade IV"
-    },
-    {
-        "field_name": "enrollment_type",
-        "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "2"
-    },
-    {
-        "field_name": "clinical_status_at_diagnosis",
-        "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "1"
-    },
-    {
-        "field_name": "race",
-        "record": "2",
-        "redcap_event_name": "demographics_arm_1",
+        "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "3"
+        "value": "2019-10-29"
     },
     {
         "field_name": "enrollment_complete",
-        "record": "3",
+        "record": "2",
         "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
         "value": "2"
-    },
-    {
-        "field_name": "race",
-        "record": "3",
-        "redcap_event_name": "demographics_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "1"
-    },
-    {
-        "field_name": "canc_predisp_condition",
-        "record": "1",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "7"
     },
     {
         "field_name": "first_name",
@@ -265,171 +385,11 @@
     },
     {
         "field_name": "institution",
-        "record": "1",
-        "redcap_event_name": "enrollment_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "1"
-    },
-    {
-        "field_name": "gender",
-        "record": "2",
-        "redcap_event_name": "demographics_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "1"
-    },
-    {
-        "field_name": "date_of_initial_diagnosis",
-        "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "2019-11-11"
-    },
-    {
-        "field_name": "demographics_complete",
-        "record": "1",
-        "redcap_event_name": "demographics_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "2"
-    },
-    {
-        "field_name": "tumor_primary_location_in",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "1"
-    },
-    {
-        "field_name": "other_med_condition",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "1"
-    },
-    {
-        "field_name": "enrollment_complete",
-        "record": "1",
-        "redcap_event_name": "enrollment_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "2"
-    },
-    {
-        "field_name": "metas_at_init_diag",
-        "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "1"
-    },
-    {
-        "field_name": "date_of_initial_diagnosis",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "2019-10-04"
-    },
-    {
-        "field_name": "diagnosis_type",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "5"
-    },
-    {
-        "field_name": "mrn",
         "record": "2",
         "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "98989898"
-    },
-    {
-        "field_name": "last_name",
-        "record": "1",
-        "redcap_event_name": "enrollment_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "Doe"
-    },
-    {
-        "field_name": "enrollment_type2",
-        "record": "2",
-        "redcap_event_name": "specimens_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "specimen",
         "value": "1"
-    },
-    {
-        "field_name": "mrn",
-        "record": "1",
-        "redcap_event_name": "enrollment_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "MRN1234567890"
-    },
-    {
-        "field_name": "specimen_complete",
-        "record": "2",
-        "redcap_event_name": "specimens_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "specimen",
-        "value": "0"
-    },
-    {
-        "field_name": "father_what_type_of_cancer",
-        "record": "1",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "6"
-    },
-    {
-        "field_name": "diagnosis_type",
-        "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "5"
-    },
-    {
-        "field_name": "father_what_type_of_cancer",
-        "record": "2",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "10"
-    },
-    {
-        "field_name": "date_of_visit_follow_up",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "update",
-        "value": "2019-11-06"
-    },
-    {
-        "field_name": "subject_ethnicity",
-        "record": "2",
-        "redcap_event_name": "demographics_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "2"
-    },
-    {
-        "field_name": "paternal_mother_cancer_type",
-        "record": "2",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "5"
     },
     {
         "field_name": "last_name",
@@ -440,44 +400,12 @@
         "value": "Palma"
     },
     {
-        "field_name": "family_history",
-        "record": "1",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "0"
-    },
-    {
-        "field_name": "family_member",
-        "record": "1",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "2"
-    },
-    {
-        "field_name": "institution",
-        "record": "3",
+        "field_name": "mrn",
+        "record": "2",
         "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "1"
-    },
-    {
-        "field_name": "subject_ethnicity",
-        "record": "3",
-        "redcap_event_name": "demographics_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "1"
-    },
-    {
-        "field_name": "init_path_diag",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "1"
+        "value": "98989898"
     },
     {
         "field_name": "dob",
@@ -488,52 +416,36 @@
         "value": "2019-10-29"
     },
     {
-        "field_name": "first_name",
-        "record": "1",
+        "field_name": "enrollment_complete",
+        "record": "3",
         "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "John"
-    },
-    {
-        "field_name": "update_complete",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "update",
-        "value": "0"
-    },
-    {
-        "field_name": "germline",
-        "record": "3",
-        "redcap_event_name": "medical_history_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "0"
-    },
-    {
-        "field_name": "specimen_type",
-        "record": "2",
-        "redcap_event_name": "specimens_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "specimen",
         "value": "2"
     },
     {
-        "field_name": "family_history",
+        "field_name": "first_name",
         "record": "3",
-        "redcap_event_name": "medical_history_arm_1",
+        "redcap_event_name": "enrollment_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "Judy"
+    },
+    {
+        "field_name": "institution",
+        "record": "3",
+        "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
         "value": "1"
     },
     {
-        "field_name": "canc_predisp_condition",
+        "field_name": "last_name",
         "record": "3",
-        "redcap_event_name": "medical_history_arm_1",
+        "redcap_event_name": "enrollment_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "1"
+        "value": "Eliza"
     },
     {
         "field_name": "mrn",
@@ -544,12 +456,36 @@
         "value": "12121212"
     },
     {
-        "field_name": "enrollment_complete",
-        "record": "2",
-        "redcap_event_name": "enrollment_arm_1",
+        "field_name": "canc_predisp_condition",
+        "record": "1",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "7"
+    },
+    {
+        "field_name": "family_history",
+        "record": "1",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "0"
+    },
+    {
+        "field_name": "family_member",
+        "record": "1",
+        "redcap_event_name": "medical_history_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
         "value": "2"
+    },
+    {
+        "field_name": "father_what_type_of_cancer",
+        "record": "1",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "6"
     },
     {
         "field_name": "predispositions_complete",
@@ -560,20 +496,28 @@
         "value": "2"
     },
     {
-        "field_name": "demographics_complete",
+        "field_name": "canc_predisp_condition",
         "record": "2",
-        "redcap_event_name": "demographics_arm_1",
+        "redcap_event_name": "medical_history_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "2"
+        "value": "7"
     },
     {
-        "field_name": "subject_ethnicity",
-        "record": "1",
-        "redcap_event_name": "demographics_arm_1",
+        "field_name": "family_history",
+        "record": "2",
+        "redcap_event_name": "medical_history_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
-        "value": "3"
+        "value": "0"
+    },
+    {
+        "field_name": "family_member",
+        "record": "2",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "7"
     },
     {
         "field_name": "family_member",
@@ -584,20 +528,84 @@
         "value": "2"
     },
     {
-        "field_name": "demographics_complete",
-        "record": "3",
-        "redcap_event_name": "demographics_arm_1",
+        "field_name": "father_what_type_of_cancer",
+        "record": "2",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "10"
+    },
+    {
+        "field_name": "paternal_mother_cancer_type",
+        "record": "2",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "5"
+    },
+    {
+        "field_name": "predispositions_complete",
+        "record": "2",
+        "redcap_event_name": "medical_history_arm_1",
         "redcap_repeat_instance": "",
         "redcap_repeat_instrument": "",
         "value": "2"
     },
     {
-        "field_name": "diagnosis_complete",
+        "field_name": "canc_predisp_condition",
+        "record": "3",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "1"
+    },
+    {
+        "field_name": "family_history",
+        "record": "3",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "1"
+    },
+    {
+        "field_name": "germline",
+        "record": "3",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "0"
+    },
+    {
+        "field_name": "predispositions_complete",
+        "record": "3",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "0"
+    },
+    {
+        "field_name": "results_available",
+        "record": "3",
+        "redcap_event_name": "medical_history_arm_1",
+        "redcap_repeat_instance": "",
+        "redcap_repeat_instrument": "",
+        "value": "0"
+    },
+    {
+        "field_name": "enrollment_type2",
         "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_event_name": "specimens_arm_1",
         "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "2"
+        "redcap_repeat_instrument": "specimen",
+        "value": "1"
+    },
+    {
+        "field_name": "only_specimen_id",
+        "record": "2",
+        "redcap_event_name": "specimens_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "specimen",
+        "value": "1234567890"
     },
     {
         "field_name": "specimen_collection_date",
@@ -608,27 +616,19 @@
         "value": "2019-11-11"
     },
     {
-        "field_name": "gender",
-        "record": "3",
-        "redcap_event_name": "demographics_arm_1",
-        "redcap_repeat_instance": "",
-        "redcap_repeat_instrument": "",
-        "value": "1"
-    },
-    {
-        "field_name": "type_of_update",
-        "record": "1",
-        "redcap_event_name": "diagnoses_arm_1",
-        "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "update",
-        "value": "2"
-    },
-    {
-        "field_name": "tumor_or_molecular_tests",
+        "field_name": "specimen_complete",
         "record": "2",
-        "redcap_event_name": "diagnoses_arm_1",
+        "redcap_event_name": "specimens_arm_1",
         "redcap_repeat_instance": 1,
-        "redcap_repeat_instrument": "diagnosis",
-        "value": "6"
+        "redcap_repeat_instrument": "specimen",
+        "value": "0"
+    },
+    {
+        "field_name": "specimen_type",
+        "record": "2",
+        "redcap_event_name": "specimens_arm_1",
+        "redcap_repeat_instance": 1,
+        "redcap_repeat_instrument": "specimen",
+        "value": "2"
     }
 ]

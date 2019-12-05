@@ -1,6 +1,9 @@
 import json
 import os
 
+import jsonpickle
+from deepdiff import DeepDiff
+
 from d3b_redcap_api.redcap import REDCapStudy
 
 r = REDCapStudy(
@@ -21,6 +24,11 @@ def _delete_records(records):
         r.delete_records(list(rnums))
 
 
+def _reinit():
+    _delete_records(r.get_records())
+    _load_records()
+
+
 def test_delete_set_get_records():
     # test delete
     _load_records()
@@ -35,3 +43,13 @@ def test_delete_set_get_records():
     r1 = sorted(tuple(sorted(r.items())) for r in records_in)
     r2 = sorted(tuple(sorted(r.items())) for r in records_out)
     assert r1 == r2
+
+
+def test_get_records_tree():
+    _delete_records(r.get_records())
+    _load_records()
+    rt1, errors = r.get_records_tree()
+    assert not errors
+    with open("tests/records_tree.json") as rtjp:
+        rt2 = jsonpickle.decode(rtjp.read())
+    assert not DeepDiff(rt1, rt2)
