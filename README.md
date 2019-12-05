@@ -3,7 +3,8 @@
 </p>
 <p align="center">
   <a href="https://github.com/d3b-center/d3b-redcap-api-python/blob/master/LICENSE"><img src="https://img.shields.io/github/license/d3b-center/d3b-redcap-api-python.svg?style=for-the-badge"></a>
-  <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge"></a>
+  <a href="https://circleci.com/gh/d3b-center/d3b-redcap-api-python"><img src="https://img.shields.io/circleci/project/github/d3b-center/d3b-redcap-api-python.svg?style=for-the-badge"></a>
+  <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black ----line--length 80-000000.svg?style=for-the-badge"></a>
 </p>
 
 # REDCap API in Python
