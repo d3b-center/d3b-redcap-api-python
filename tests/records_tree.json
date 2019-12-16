@@ -200,6 +200,44 @@
                         ]
                     }
                 }
+            },
+            "3": {
+                "1": {
+                    "diagnosis_complete": {
+                        "py/set": [
+                            "Incomplete"
+                        ]
+                    }
+                }
+            }
+        },
+        "treatment": {
+            "1": {
+                "1": {
+                    "treatment_complete": {
+                        "py/set": [
+                            "Incomplete"
+                        ]
+                    }
+                }
+            },
+            "2": {
+                "1": {
+                    "treatment_complete": {
+                        "py/set": [
+                            "Incomplete"
+                        ]
+                    }
+                }
+            },
+            "3": {
+                "1": {
+                    "treatment_complete": {
+                        "py/set": [
+                            "Incomplete"
+                        ]
+                    }
+                }
             }
         },
         "update": {
@@ -215,6 +253,24 @@
                             "6 Month Update"
                         ]
                     },
+                    "update_complete": {
+                        "py/set": [
+                            "Incomplete"
+                        ]
+                    }
+                }
+            },
+            "2": {
+                "1": {
+                    "update_complete": {
+                        "py/set": [
+                            "Incomplete"
+                        ]
+                    }
+                }
+            },
+            "3": {
+                "1": {
                     "update_complete": {
                         "py/set": [
                             "Incomplete"
@@ -372,8 +428,8 @@
                     },
                     "family_member": {
                         "py/set": [
-                            "Father",
-                            "Paternal Grandmother"
+                            "Paternal Grandmother",
+                            "Father"
                         ]
                     },
                     "father_what_type_of_cancer": {
@@ -426,6 +482,15 @@
     },
     "specimens_arm_1": {
         "specimen": {
+            "1": {
+                "1": {
+                    "specimen_complete": {
+                        "py/set": [
+                            "Incomplete"
+                        ]
+                    }
+                }
+            },
             "2": {
                 "1": {
                     "enrollment_type2": {
@@ -451,6 +516,15 @@
                     "specimen_type": {
                         "py/set": [
                             "Maternal"
+                        ]
+                    }
+                }
+            },
+            "3": {
+                "1": {
+                    "specimen_complete": {
+                        "py/set": [
+                            "Incomplete"
                         ]
                     }
                 }

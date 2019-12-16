@@ -1,4 +1,5 @@
 import json
+import re
 from collections import defaultdict
 from urllib.parse import unquote
 
@@ -45,7 +46,9 @@ class REDCapStudy:
         if "data" in all_params and not isinstance(all_params["data"], str):
             all_params["data"] = json.dumps(all_params["data"])
         all_params = {k: v for k, v in all_params.items() if v is not None}
-        resp = Session().post(self.api, data=all_params, **kwargs)
+        resp = Session(status_forcelist=(502, 503, 504)).post(
+            self.api, data=all_params, **kwargs
+        )
         if resp.status_code != 200:
             raise REDCapError(f"HTTP {resp.status_code} - {resp.text}")
         return resp
@@ -339,12 +342,14 @@ class REDCapStudy:
                 else "false",
             },
         )
-        return [r for r in records if r["field_name"] != "study_id"]
+        if type == "eav":
+            id_field = self.get_data_dictionary()[0]["field_name"]
+            records = [r for r in records if r["field_name"] != id_field]
+        return records
 
     def set_records(
         self, records, type="eav", overwrite=False, auto_number=False
     ):
-        records = [r for r in records if r["field_name"] != "study_id"]
         args = {
             "type": type,
             "data": records,
@@ -353,7 +358,7 @@ class REDCapStudy:
         }
         if auto_number:
             args["returnContent"] = "auto_ids"
-        self._get_json("record", params=args)
+        return self._get_json("record", params=args)
 
     def delete_records(self, record_name_list, arm=None):
         args = {"action": "delete"}
@@ -361,7 +366,7 @@ class REDCapStudy:
             args[f"records[{i}]"] = r
         if arm is not None:
             args["arm"] = arm
-        self._get_json("record", args)
+        return self._get_json("record", args)
 
     def get_repeating_forms_events(self):
         self._get_json("repeatingFormsEvents")
@@ -381,8 +386,7 @@ class REDCapStudy:
         )
 
     def get_selector_choice_map(self):
-        """
-        Returns a map for every field that needs translation from index to
+        """Returns a map for every field that needs translation from index to
         value:
         {
             <field_name>: {
@@ -417,7 +421,7 @@ class REDCapStudy:
             }
         return store
 
-    def get_records_tree(self):
+    def get_records_tree(self, debug_type="flat"):
         """Returns all data from the study in the nested form:
         {
             <event_name>: {            # event data
@@ -436,6 +440,7 @@ class REDCapStudy:
             ...
         }
         """
+        # this is where we'll store all the data
         store = defaultdict(  # events
             lambda: defaultdict(  # instruments
                 lambda: defaultdict(  # subjects
@@ -446,17 +451,17 @@ class REDCapStudy:
             )
         )
 
-        field_forms = {
-            m["field_name"]: m["form_name"] for m in self.get_data_dictionary()
-        }
+        data_dict = self.get_data_dictionary()
+        record_id_field = data_dict[0]["field_name"]
+        field_forms = {m["field_name"]: m["form_name"] for m in data_dict}
         # "<instrument>_complete" fields are not considered part of the
         # instruments, so include them specially
         for inst in set(field_forms.values()):
             field_forms[f"{inst}_complete"] = inst
 
         event_forms = defaultdict(set)
-        for form in self._get_json("formEventMapping"):
-            event_forms[form["unique_event_name"]].add(form["form"])
+        for iem in self.get_instrument_event_mappings():
+            event_forms[iem["unique_event_name"]].add(iem["form"])
 
         selector_map = self.get_selector_choice_map()
 
@@ -476,58 +481,109 @@ class REDCapStudy:
         # come from instruments that aren't repeating.
 
         errors = defaultdict(list)
-
+        all_subjects = set()
         for r in self.get_records(
-            type="eav",
+            type=debug_type,
             raw=True,
             raw_headers=True,
             checkbox_labels=False,
             survey_fields=True,
             data_access_groups=True,
         ):
-            event = r["redcap_event_name"]
-            subject = r["record"]
-            field = r["field_name"]
-            value = r["value"]
-            form = field_forms.get(field)
 
-            def record_error(what):
-                errors[what].append(
-                    {
-                        "event": event,
-                        "subject": subject,
-                        "field": field,
-                        "value": value,
-                        "form": form,
-                    }
-                )
+            def _check_error_map_add():
+                def _record_error(what):
+                    errors[what].append(
+                        {
+                            "event": event,
+                            "subject": subject,
+                            "field": field,
+                            "value": value,
+                            "form": form,
+                        }
+                    )
 
-            if event not in event_forms:  # obsolete
-                record_error("event is missing")
-                continue
-
-            mapped_value = value
-            if field in selector_map:
-                if value not in selector_map[field]:  # obsolete
-                    if value in selector_map[field].values():
-                        record_error("choice value as text")
+                mapped_value = value
+                if field in selector_map:
+                    if value not in selector_map[field]:  # obsolete
+                        if value in selector_map[field].values():
+                            _record_error("choice value as text")
+                        else:
+                            _record_error("choice value is missing")
+                        return False
+                    mapped_value = selector_map[field][value]
+                if event not in event_forms:  # obsolete
+                    _record_error("event is missing")
+                    return False
+                if field not in field_forms:  # obsolete
+                    _record_error("field not in a form")
+                    return False
+                if form not in event_forms[event]:  # obsolete
+                    _record_error("form not in given event")
+                    return False
+                if field != record_id_field:
+                    if field == f"{form}_complete":
+                        store[event][form][subject][instance][field] = {
+                            mapped_value
+                        }
                     else:
-                        record_error("choice value is missing")
-                    continue
-                mapped_value = selector_map[field][value]
+                        store[event][form][subject][instance][field].add(
+                            mapped_value
+                        )
+                return True
 
-            if field not in field_forms:  # obsolete
-                record_error("field not in a form")
-                continue
+            event = r.pop("redcap_event_name")
 
-            if form not in event_forms[event]:  # obsolete
-                record_error("form not in given event")
-                continue
-
-            # The API will return 1, '2', for repeat instances.
+            # The API will return 1, "2", for repeat instances.
             # Note that 1 was an int and 2 was a str.
-            instance = str(r.get("redcap_repeat_instance") or "1")
-            if field != "study_id":
-                store[event][form][subject][instance][field].add(mapped_value)
+            # The API can also return "" or nothing at all.
+            instance = str(r.pop("redcap_repeat_instance", "1") or "1")
+            repeat_form = r.pop("redcap_repeat_instrument", None)
+
+            if debug_type == "eav":
+                subject = r["record"]
+                all_subjects.add(subject)
+
+                field = r["field_name"]
+                value = r["value"]
+                form = repeat_form or field_forms.get(field)
+
+                if not _check_error_map_add():
+                    continue
+            else:
+                subject = r.pop(record_id_field)
+                all_subjects.add(subject)
+
+                for field, value in r.items():
+                    form = repeat_form or field_forms.get(field)
+
+                    if re.search(r"___\d+$", field):  # probably checkboxes
+                        real_field, real_value = field.rsplit("___", 1)
+                        if real_field in selector_map:  # definitely checkboxes
+                            if value == "0":
+                                continue  # checkbox not selected
+                            if value == "":
+                                continue  # checkbox not present
+
+                            field = real_field
+                            value = real_value
+                            form = field_forms.get(field)
+
+                    if value == "":  # regular field not populated
+                        continue
+
+                    if not _check_error_map_add():
+                        continue
+
+        for event_name, event_form_names in event_forms.items():
+            for form_name in event_form_names:
+                for subject in all_subjects:
+                    if not store[event_name][form_name][subject]:
+                        store[event_name][form_name][subject] = {"1": dict()}
+                    for i, iv in store[event_name][form_name][subject].items():
+                        if f"{form_name}_complete" not in iv:
+                            store[event_name][form_name][subject][i][
+                                f"{form_name}_complete"
+                            ] = {"Incomplete"}
 
         return _undefault_dict(store), _undefault_dict(errors)
