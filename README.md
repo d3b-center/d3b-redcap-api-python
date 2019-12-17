@@ -12,7 +12,7 @@
 Supports structured data extraction for REDCap projects
 
 ```Python
-from redcap import REDCapStudy
+from d3b_redcap_api.redcap import REDCapStudy
 
 
 r = REDCapStudy("https://redcap.chop.edu/api/", PROJECT_API_TOKEN)
