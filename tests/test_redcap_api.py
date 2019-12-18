@@ -44,11 +44,23 @@ def test_delete_set_get_records():
     assert r1 == r2
 
 
+def _trim_rt(stuff):
+    to_delete = set()
+    for k, v in stuff.items():
+        if v == [""]:
+            to_delete.add(k)
+        elif isinstance(v, dict):
+            _trim_rt(v)
+    for k in to_delete:
+        del stuff[k]
+
+
 def test_get_records_tree():
     _delete_records(r.get_records())
     _load_records()
     rt1, errors = r.get_records_tree()
     assert not errors
+    _trim_rt(rt1)
     with open("tests/records_tree.json") as rtjp:
         rt2 = json.load(rtjp)
     assert not DeepDiff(rt1, rt2)

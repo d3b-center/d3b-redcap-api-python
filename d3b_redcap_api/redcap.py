@@ -492,7 +492,7 @@ class REDCapStudy:
             data_access_groups=True,
         ):
 
-            def _check_error_map_add():
+            def _check_errors_and_store_mapped():
                 def _record_error(what):
                     errors[what].append(
                         {
@@ -505,7 +505,7 @@ class REDCapStudy:
                     )
 
                 mapped_value = value
-                if field in selector_map:
+                if (field in selector_map) and (value != ""):
                     if value not in selector_map[field]:  # obsolete
                         if value in selector_map[field].values():
                             _record_error("choice value as text")
@@ -539,6 +539,10 @@ class REDCapStudy:
             # Note that 1 was an int and 2 was a str.
             # The API can also return "" or nothing at all.
             instance = str(r.pop("redcap_repeat_instance", "1") or "1")
+
+            # This is only populated for repeat instruments, because the REDCap
+            # motto is "Why do the same thing all the time when we could do
+            # something different every time?"
             repeat_form = r.pop("redcap_repeat_instrument", None)
 
             if debug_type == "eav":
@@ -549,7 +553,7 @@ class REDCapStudy:
                 value = r["value"]
                 form = repeat_form or field_forms.get(field)
 
-                if not _check_error_map_add():
+                if not _check_errors_and_store_mapped():
                     continue
             else:
                 subject = r.pop(record_id_field)
@@ -570,21 +574,28 @@ class REDCapStudy:
                             value = real_value
                             form = field_forms.get(field)
 
-                    if value == "":  # regular field not populated
+                    if (value == "") and (form not in event_forms[event]):
+                        continue  # field not present
+
+                    if not _check_errors_and_store_mapped():
                         continue
 
-                    if not _check_error_map_add():
-                        continue
-
-        for event_name, event_form_names in event_forms.items():
-            for form_name in event_form_names:
+        # Should unused forms and fields be represented too for completeness?
+        # Let's mark them as present and empty but incomplete.
+        form_fields = defaultdict(set)
+        for field, form in field_forms.items():
+            form_fields[form].add(field)
+        for event, event_forms in event_forms.items():
+            for form in event_forms:
                 for subject in all_subjects:
-                    if not store[event_name][form_name][subject]:
-                        store[event_name][form_name][subject] = {"1": dict()}
-                    for i, iv in store[event_name][form_name][subject].items():
-                        if f"{form_name}_complete" not in iv:
-                            store[event_name][form_name][subject][i][
-                                f"{form_name}_complete"
-                            ] = {"Incomplete"}
+                    if not store[event][form][subject]:
+                        store[event][form][subject] = {"1": dict()}
+                    for i, iv in store[event][form][subject].items():
+                        for field in form_fields[form]:
+                            if field not in iv:
+                                if field == f"{form}_complete":
+                                    iv[field] = {"Incomplete"}
+                                else:
+                                    iv[field] = {""}
 
         return _undefault_dict(store), _undefault_dict(errors)
