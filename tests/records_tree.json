@@ -3,74 +3,26 @@
         "demographics": {
             "1": {
                 "1": {
-                    "demographics_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    },
-                    "gender": {
-                        "py/set": [
-                            "Male"
-                        ]
-                    },
-                    "race": {
-                        "py/set": [
-                            "Other/Unavailable/Not Reported"
-                        ]
-                    },
-                    "subject_ethnicity": {
-                        "py/set": [
-                            "Unavailable/Not Reported"
-                        ]
-                    }
+                    "demographics_complete": ["Complete"],
+                    "gender": ["Male"],
+                    "race": ["Other/Unavailable/Not Reported"],
+                    "subject_ethnicity": ["Unavailable/Not Reported"]
                 }
             },
             "2": {
                 "1": {
-                    "demographics_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    },
-                    "gender": {
-                        "py/set": [
-                            "Female"
-                        ]
-                    },
-                    "race": {
-                        "py/set": [
-                            "Asian"
-                        ]
-                    },
-                    "subject_ethnicity": {
-                        "py/set": [
-                            "Not Hispanic or Latino"
-                        ]
-                    }
+                    "demographics_complete": ["Complete"],
+                    "gender": ["Female"],
+                    "race": ["Asian"],
+                    "subject_ethnicity": ["Not Hispanic or Latino"]
                 }
             },
             "3": {
                 "1": {
-                    "demographics_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    },
-                    "gender": {
-                        "py/set": [
-                            "Female"
-                        ]
-                    },
-                    "race": {
-                        "py/set": [
-                            "White"
-                        ]
-                    },
-                    "subject_ethnicity": {
-                        "py/set": [
-                            "Hispanic or Latino"
-                        ]
-                    }
+                    "demographics_complete": ["Complete"],
+                    "gender": ["Female"],
+                    "race": ["White"],
+                    "subject_ethnicity": ["Hispanic or Latino"]
                 }
             }
         }
@@ -79,203 +31,77 @@
         "diagnosis": {
             "1": {
                 "1": {
-                    "clinical_status_at_diagnosis": {
-                        "py/set": [
-                            "Alive"
-                        ]
-                    },
-                    "date_of_initial_diagnosis": {
-                        "py/set": [
-                            "2019-10-04"
-                        ]
-                    },
-                    "diagnosis_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    },
-                    "diagnosis_type": {
-                        "py/set": [
-                            "Initial CNS Tumor"
-                        ]
-                    },
-                    "enrollment_type": {
-                        "py/set": [
-                            "Prospective"
-                        ]
-                    },
-                    "init_path_diag": {
-                        "py/set": [
-                            "Medulloblastoma"
-                        ]
-                    },
-                    "metas_at_init_diag": {
-                        "py/set": [
-                            "No"
-                        ]
-                    },
-                    "other_med_condition": {
-                        "py/set": [
-                            "Seizure disorder"
-                        ]
-                    },
-                    "path_diag": {
-                        "py/set": [
-                            "None"
-                        ]
-                    },
-                    "path_test_avail": {
-                        "py/set": [
-                            "No"
-                        ]
-                    },
-                    "tumor_or_molecular_tests": {
-                        "py/set": [
-                            "FISH"
-                        ]
-                    },
-                    "tumor_primary_location_in": {
-                        "py/set": [
-                            "Frontal Lobe"
-                        ]
-                    }
+                    "clinical_status_at_diagnosis": ["Alive"],
+                    "date_of_initial_diagnosis": ["2019-10-04"],
+                    "diagnosis_complete": ["Complete"],
+                    "diagnosis_type": ["Initial CNS Tumor"],
+                    "enrollment_type": ["Prospective"],
+                    "init_path_diag": ["Medulloblastoma"],
+                    "metas_at_init_diag": ["No"],
+                    "other_med_condition": ["Seizure disorder"],
+                    "path_diag": ["None"],
+                    "path_test_avail": ["No"],
+                    "tumor_or_molecular_tests": ["FISH"],
+                    "tumor_primary_location_in": ["Frontal Lobe"]
                 }
             },
             "2": {
                 "1": {
-                    "clinical_status_at_diagnosis": {
-                        "py/set": [
-                            "Alive"
-                        ]
-                    },
-                    "date_of_initial_diagnosis": {
-                        "py/set": [
-                            "2019-11-11"
-                        ]
-                    },
-                    "diagnosis_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    },
-                    "diagnosis_type": {
-                        "py/set": [
-                            "Initial CNS Tumor"
-                        ]
-                    },
-                    "enrollment_type": {
-                        "py/set": [
-                            "Prospective"
-                        ]
-                    },
-                    "init_path_diag": {
-                        "py/set": [
-                            "Medulloblastoma"
-                        ]
-                    },
-                    "metas_at_init_diag": {
-                        "py/set": [
-                            "No"
-                        ]
-                    },
-                    "other_med_condition": {
-                        "py/set": [
-                            "Seizure disorder",
-                            "Visual deficit (acuity or fields)"
-                        ]
-                    },
-                    "path_diag": {
-                        "py/set": [
-                            "Grade IV"
-                        ]
-                    },
-                    "tumor_or_molecular_tests": {
-                        "py/set": [
-                            "None"
-                        ]
-                    },
-                    "tumor_primary_location_in": {
-                        "py/set": [
-                            "Frontal Lobe"
-                        ]
-                    }
+                    "clinical_status_at_diagnosis": ["Alive"],
+                    "date_of_initial_diagnosis": ["2019-11-11"],
+                    "diagnosis_complete": ["Complete"],
+                    "diagnosis_type": ["Initial CNS Tumor"],
+                    "enrollment_type": ["Prospective"],
+                    "init_path_diag": ["Medulloblastoma"],
+                    "metas_at_init_diag": ["No"],
+                    "other_med_condition": [
+                        "Seizure disorder",
+                        "Visual deficit (acuity or fields)"
+                    ],
+                    "path_diag": ["Grade IV"],
+                    "tumor_or_molecular_tests": ["None"],
+                    "tumor_primary_location_in": ["Frontal Lobe"]
                 }
             },
             "3": {
                 "1": {
-                    "diagnosis_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    }
+                    "diagnosis_complete": ["Incomplete"]
                 }
             }
         },
         "treatment": {
             "1": {
                 "1": {
-                    "treatment_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    }
+                    "treatment_complete": ["Incomplete"]
                 }
             },
             "2": {
                 "1": {
-                    "treatment_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    }
+                    "treatment_complete": ["Incomplete"]
                 }
             },
             "3": {
                 "1": {
-                    "treatment_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    }
+                    "treatment_complete": ["Incomplete"]
                 }
             }
         },
         "update": {
             "1": {
                 "1": {
-                    "date_of_visit_follow_up": {
-                        "py/set": [
-                            "2019-11-06"
-                        ]
-                    },
-                    "type_of_update": {
-                        "py/set": [
-                            "6 Month Update"
-                        ]
-                    },
-                    "update_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    }
+                    "date_of_visit_follow_up": ["2019-11-06"],
+                    "type_of_update": ["6 Month Update"],
+                    "update_complete": ["Incomplete"]
                 }
             },
             "2": {
                 "1": {
-                    "update_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    }
+                    "update_complete": ["Incomplete"]
                 }
             },
             "3": {
                 "1": {
-                    "update_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    }
+                    "update_complete": ["Incomplete"]
                 }
             }
         }
@@ -284,101 +110,32 @@
         "enrollment": {
             "1": {
                 "1": {
-                    "dob": {
-                        "py/set": [
-                            "2019-10-04"
-                        ]
-                    },
-                    "enrollment_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    },
-                    "first_name": {
-                        "py/set": [
-                            "John"
-                        ]
-                    },
-                    "institution": {
-                        "py/set": ["The Children's Hospital of Philadelphia"
-                        ]
-                    },
-                    "last_name": {
-                        "py/set": [
-                            "Doe"
-                        ]
-                    },
-                    "mrn": {
-                        "py/set": [
-                            "MRN1234567890"
-                        ]
-                    }
+                    "dob": ["2019-10-04"],
+                    "enrollment_complete": ["Complete"],
+                    "first_name": ["John"],
+                    "institution": ["The Children's Hospital of Philadelphia"],
+                    "last_name": ["Doe"],
+                    "mrn": ["MRN1234567890"]
                 }
             },
             "2": {
                 "1": {
-                    "dob": {
-                        "py/set": [
-                            "2019-10-29"
-                        ]
-                    },
-                    "enrollment_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    },
-                    "first_name": {
-                        "py/set": [
-                            "Dorothy"
-                        ]
-                    },
-                    "institution": {
-                        "py/set": ["The Children's Hospital of Philadelphia"
-                        ]
-                    },
-                    "last_name": {
-                        "py/set": [
-                            "Palma"
-                        ]
-                    },
-                    "mrn": {
-                        "py/set": [
-                            "98989898"
-                        ]
-                    }
+                    "dob": ["2019-10-29"],
+                    "enrollment_complete": ["Complete"],
+                    "first_name": ["Dorothy"],
+                    "institution": ["The Children's Hospital of Philadelphia"],
+                    "last_name": ["Palma"],
+                    "mrn": ["98989898"]
                 }
             },
             "3": {
                 "1": {
-                    "dob": {
-                        "py/set": [
-                            "2019-10-29"
-                        ]
-                    },
-                    "enrollment_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    },
-                    "first_name": {
-                        "py/set": [
-                            "Judy"
-                        ]
-                    },
-                    "institution": {
-                        "py/set": ["The Children's Hospital of Philadelphia"
-                        ]
-                    },
-                    "last_name": {
-                        "py/set": [
-                            "Eliza"
-                        ]
-                    },
-                    "mrn": {
-                        "py/set": [
-                            "12121212"
-                        ]
-                    }
+                    "dob": ["2019-10-29"],
+                    "enrollment_complete": ["Complete"],
+                    "first_name": ["Judy"],
+                    "institution": ["The Children's Hospital of Philadelphia"],
+                    "last_name": ["Eliza"],
+                    "mrn": ["12121212"]
                 }
             }
         }
@@ -387,95 +144,33 @@
         "predispositions": {
             "1": {
                 "1": {
-                    "canc_predisp_condition": {
-                        "py/set": [
-                            "None documented"
-                        ]
-                    },
-                    "family_history": {
-                        "py/set": [
-                            "Yes"
-                        ]
-                    },
-                    "family_member": {
-                        "py/set": [
-                            "Father"
-                        ]
-                    },
-                    "father_what_type_of_cancer": {
-                        "py/set": [
-                            "Colon"
-                        ]
-                    },
-                    "predispositions_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    }
+                    "canc_predisp_condition": ["None documented"],
+                    "family_history": ["Yes"],
+                    "family_member": ["Father"],
+                    "father_what_type_of_cancer": ["Colon"],
+                    "predispositions_complete": ["Complete"]
                 }
             },
             "2": {
                 "1": {
-                    "canc_predisp_condition": {
-                        "py/set": [
-                            "None documented"
-                        ]
-                    },
-                    "family_history": {
-                        "py/set": [
-                            "Yes"
-                        ]
-                    },
-                    "family_member": {
-                        "py/set": [
-                            "Paternal Grandmother",
-                            "Father"
-                        ]
-                    },
-                    "father_what_type_of_cancer": {
-                        "py/set": [
-                            "Prostate"
-                        ]
-                    },
-                    "paternal_mother_cancer_type": {
-                        "py/set": [
-                            "Breast"
-                        ]
-                    },
-                    "predispositions_complete": {
-                        "py/set": [
-                            "Complete"
-                        ]
-                    }
+                    "canc_predisp_condition": ["None documented"],
+                    "family_history": ["Yes"],
+                    "family_member": [
+                        "Father",
+                        "Paternal Grandmother"
+                    ],
+                    "father_what_type_of_cancer": ["Prostate"],
+                    "paternal_mother_cancer_type": ["Breast"],
+                    "predispositions_complete": ["Complete"]
                 }
             },
             "3": {
                 "1": {
-                    "canc_predisp_condition": {
-                        "py/set": [
-                            "NF-1"
-                        ]
-                    },
-                    "family_history": {
-                        "py/set": [
-                            "No"
-                        ]
-                    },
-                    "germline": {
-                        "py/set": [
-                            "No"
-                        ]
-                    },
-                    "predispositions_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    },
-                    "results_available": {
-                        "py/set": [
-                            "No"
-                        ]
-                    }
+                    "canc_predisp_condition": ["NF-1"],
+                    "family_history": ["No"],
+                    "germline": ["No"],
+                    "predispositions_complete": ["Incomplete"],
+                    "results_available": ["No"]
                 }
             }
         }
@@ -484,49 +179,21 @@
         "specimen": {
             "1": {
                 "1": {
-                    "specimen_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    }
+                    "specimen_complete": ["Incomplete"]
                 }
             },
             "2": {
                 "1": {
-                    "enrollment_type2": {
-                        "py/set": [
-                            "Transfer/Existing (retrospective)"
-                        ]
-                    },
-                    "only_specimen_id": {
-                        "py/set": [
-                            "1234567890"
-                        ]
-                    },
-                    "specimen_collection_date": {
-                        "py/set": [
-                            "2019-11-11"
-                        ]
-                    },
-                    "specimen_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    },
-                    "specimen_type": {
-                        "py/set": [
-                            "Maternal"
-                        ]
-                    }
+                    "enrollment_type2": ["Transfer/Existing (retrospective)"],
+                    "only_specimen_id": ["1234567890"],
+                    "specimen_collection_date": ["2019-11-11"],
+                    "specimen_complete": ["Incomplete"],
+                    "specimen_type": ["Maternal"]
                 }
             },
             "3": {
                 "1": {
-                    "specimen_complete": {
-                        "py/set": [
-                            "Incomplete"
-                        ]
-                    }
+                    "specimen_complete": ["Incomplete"]
                 }
             }
         }
