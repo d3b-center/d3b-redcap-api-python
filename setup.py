@@ -13,7 +13,7 @@ with open(path.join(root_dir, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="d3b-redcap-api",
-    version="0.1.0",
+    version="0.2.0",
     description="REDCap API interface",
     long_description=long_description,
     long_description_content_type="text/markdown",
