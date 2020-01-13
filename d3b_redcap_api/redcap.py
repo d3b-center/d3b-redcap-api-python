@@ -7,8 +7,10 @@ from d3b_utils.requests_retry import Session
 
 
 def _undefault_dict(d):
-    if isinstance(d, defaultdict):
+    if isinstance(d, dict):
         d = {k: _undefault_dict(v) for k, v in d.items()}
+    if isinstance(d, set):
+        return sorted(d)
     return d
 
 
@@ -298,11 +300,10 @@ class REDCapStudy:
             store[instrument]["fields"][field_name] = m
             store[instrument]["events"] = set()
 
-        store = _undefault_dict(store)
         for form in self.get_instrument_event_mappings():
             store[form["form"]]["events"].add(form["unique_event_name"])
 
-        return store
+        return _undefault_dict(store)
 
     def _records_getter(
         self,

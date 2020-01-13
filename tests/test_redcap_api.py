@@ -1,7 +1,6 @@
 import json
 import os
 
-import jsonpickle
 from deepdiff import DeepDiff
 
 from d3b_redcap_api.redcap import REDCapStudy
@@ -51,5 +50,5 @@ def test_get_records_tree():
     rt1, errors = r.get_records_tree()
     assert not errors
     with open("tests/records_tree.json") as rtjp:
-        rt2 = jsonpickle.decode(rtjp.read())
+        rt2 = json.load(rtjp)
     assert not DeepDiff(rt1, rt2)
