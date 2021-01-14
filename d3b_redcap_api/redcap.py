@@ -321,6 +321,12 @@ class REDCapStudy:
         args.update(params or {})
         return self._get_json(content, params=args)
 
+    def get_subjects(self):
+        """Get the list of record subject IDs"""
+        id_field = self.get_data_dictionary()[0]["field_name"]
+        id_records = self._records_getter("record", params={"fields": id_field})
+        return list({e["study_id"] for e in id_records})
+
     def get_records(
         self,
         type="eav",
@@ -330,19 +336,43 @@ class REDCapStudy:
         survey_fields=True,
         data_access_groups=True,
     ):
-        records = self._records_getter(
-            "record",
-            raw=raw,
-            raw_headers=raw_headers,
-            checkbox_labels=checkbox_labels,
-            params={
+        """Returns all data from the study without restructuring"""
+        remaining_subjects = self.get_subjects()
+        batch_size = len(remaining_subjects)
+        print(f"Found {batch_size} subjects.")
+        records = []
+        while remaining_subjects:
+            batch = remaining_subjects[:batch_size]
+            print(f"Requesting {len(batch)} subjects...")
+            params = {
                 "type": type,
                 "exportSurveyFields": "true" if survey_fields else "false",
                 "exportDataAccessGroups": "true"
                 if data_access_groups
                 else "false",
-            },
-        )
+            }
+            for i, r in enumerate(batch):
+                params[f"records[{i}]"] = r
+
+            try:
+                records.extend(
+                    self._records_getter(
+                        "record",
+                        raw=raw,
+                        raw_headers=raw_headers,
+                        checkbox_labels=checkbox_labels,
+                        params=params,
+                    )
+                )
+                remaining_subjects = remaining_subjects[batch_size:]
+            except REDCapError as e:
+                if str(e).startswith(("HTTP 400", "HTTP 500")):
+                    print("Reducing batch size and trying again...")
+                    batch_size = int(0.5 + (batch_size / 2))
+                else:
+                    print(str(e))
+                    return
+
         if type == "eav":
             id_field = self.get_data_dictionary()[0]["field_name"]
             records = [r for r in records if r["field_name"] != id_field]
