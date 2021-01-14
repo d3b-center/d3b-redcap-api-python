@@ -15,6 +15,24 @@ Supports structured data extraction for REDCap projects
 from d3b_redcap_api.redcap import REDCapStudy
 
 
+"""Returns all data from the study in the nested form:
+{
+    <event_name>: {            # event data
+        <instrument_name>: {   # instrument data
+            <record_id>: {     # subject data for this event+instrument
+                <instance>: {  # subject event+instrument instance
+                    <field>: set(), # field values
+                    ...
+                },
+                ...
+            },
+            ...
+        },
+        ...
+    },
+    ...
+}
+"""
 r = REDCapStudy("https://redcap.chop.edu/api/", PROJECT_API_TOKEN)
 study_data, errors = r.get_records_tree()
 ```
