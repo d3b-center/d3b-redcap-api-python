@@ -325,7 +325,7 @@ class REDCapStudy:
         """Get the list of record subject IDs"""
         id_field = self.get_data_dictionary()[0]["field_name"]
         id_records = self._records_getter("record", params={"fields": id_field})
-        return list({e["study_id"] for e in id_records})
+        return list({e[id_field] for e in id_records})
 
     def get_records(
         self,
