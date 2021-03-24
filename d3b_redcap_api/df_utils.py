@@ -27,7 +27,7 @@ def to_df(records_tree, event_name, instrument_name):
         f"{instrument_name}_complete",
     }
     df = df.dropna(how="all", subset=df.columns.difference(unimportant))
-    return df.replace(nan, "").astype(str)
+    return df
 
 
 def all_dfs(records_tree):
