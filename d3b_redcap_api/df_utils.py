@@ -1,53 +1,36 @@
-import numpy
+from numpy import nan
 from pandas import DataFrame
 
 
-def _clean(df):
-    return df.replace(numpy.nan, "").astype(str)
-
-
-def to_df(instrument):
+def to_df(records_tree, event_name, instrument_name):
     """
     Converts a `get_records_tree()[event][instrument]` to a pandas DataFrame
     """
+    # get records
+    instrument = records_tree[event_name][instrument_name]
+
+    # convert records to dataframe rows
     acc = []
     for p, es in instrument.items():
         for i, e in es.items():
-            thing = {"subject": p, "instance": i}
-            for k, v in e.items():
-                thing[k] = "+".join(sorted(v))
-            acc.append(thing)
+            entry = {"subject": p, f"subject_{instrument_name}_instance": i}
+            entry.update({k: "+".join(sorted(v)) for k, v in e.items()})
+            acc.append(entry)
+    df = DataFrame(acc)
 
-    return _clean(DataFrame.from_records(acc))
+    # drop rows that are empty in important (not unimportant) fields
+    unimportant = {
+        "subject",
+        f"subject_{instrument_name}_instance",
+        f"{instrument_name}_complete",
+    }
+    df = df.dropna(how="all", subset=df.columns.difference(unimportant))
+    return df.replace(nan, "").astype(str)
 
 
-def new_column_from_linked(
-    df, other_df, df_on, other_on, new_col_name, from_col_names, separator
-):
+def summary_column(df, from_col_names, separator):
     """
-    Create a new column in pandas DataFrame df that semantically references
-    entries in other_df
+    Create a delimited summary column from multiple columns.
     """
-    joined_df = _clean(
-        df.merge(
-            other_df,
-            how="left",
-            left_on=["subject", df_on],
-            right_on=["subject", other_on],
-        )
-        .sort_values(by=["subject", df_on])
-        .set_index("subject")
-        .reset_index()
-    )
-
-    nc = None
-    for c in from_col_names:
-        if nc is None:
-            nc = joined_df[c]
-        else:
-            nc = nc + separator + joined_df[c]
-    joined_df[new_col_name] = nc.replace(
-        f"^{separator}{separator}$", "", regex=True
-    )
-
-    return joined_df[[new_col_name] + list(df.columns)]
+    nc = df[from_col_names].apply(lambda r: separator.join(r), axis=1)
+    return nc.replace(f"^{separator}{separator}$", "", regex=True)
