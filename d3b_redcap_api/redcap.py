@@ -109,6 +109,13 @@ class REDCapStudy:
             },
         )
 
+    def get_instrument_labels(self):
+        """Export mappings of instrument internal names to their display labels
+
+        :return: list of dicts with instrument_name and instrument_label keys
+        """
+        return self._get_json("instrument")
+
     def get_field_export_names(self):
         """Export mappings of field names and selected values to exported names
 
