@@ -52,3 +52,19 @@ def test_get_records_tree():
     with open("tests/records_tree.json") as rtjp:
         rt2 = json.load(rtjp)
     assert not DeepDiff(rt1, rt2)
+
+
+def test_get_labels():
+    truth = {
+        "enrollment": "Enrollment",
+        "demographics": "Demographics",
+        "predispositions": "Predispositions",
+        "diagnosis": "Diagnosis",
+        "update": "Update",
+        "treatment": "Treatment",
+        "specimen": "Specimen",
+    }
+    instas = r.get_instrument_labels()
+    assert sorted(e["instrument_name"] for e in instas) == sorted(truth.keys())
+    for i in instas:
+        assert truth[i["instrument_name"]] == i["instrument_label"]
