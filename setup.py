@@ -12,8 +12,12 @@ with open(path.join(root_dir, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
+    use_scm_version={
+        "local_scheme": "dirty-tag",
+        "version_scheme": "post-release",
+    },
+    setup_requires=["setuptools_scm"],
     name="d3b-redcap-api",
-    version="0.2.0",
     description="REDCap API interface",
     long_description=long_description,
     long_description_content_type="text/markdown",
