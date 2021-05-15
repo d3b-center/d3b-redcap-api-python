@@ -342,6 +342,7 @@ class REDCapStudy:
         checkbox_labels=False,
         survey_fields=True,
         data_access_groups=True,
+        fields=None,
     ):
         """Returns all data from the study without restructuring"""
         remaining_subjects = self.get_subjects()
@@ -360,6 +361,10 @@ class REDCapStudy:
             }
             for i, r in enumerate(batch):
                 params[f"records[{i}]"] = r
+
+            if fields:
+                for i, f in enumerate(fields):
+                    params[f"fields[{i}]"] = f
 
             try:
                 records.extend(
