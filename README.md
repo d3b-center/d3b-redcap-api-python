@@ -34,5 +34,5 @@ from d3b_redcap_api.redcap import REDCapStudy
 }
 """
 r = REDCapStudy("https://redcap.chop.edu/api/", PROJECT_API_TOKEN)
-study_data, errors = r.get_records_tree()
+study_data, errors = r.get_records_tree(raw_selectors=False)
 ```

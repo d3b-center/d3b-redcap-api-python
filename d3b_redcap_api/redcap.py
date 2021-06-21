@@ -464,7 +464,7 @@ class REDCapStudy:
             }
         return store
 
-    def get_records_tree(self, debug_type="flat"):
+    def get_records_tree(self, debug_type="flat", raw_selectors=False):
         """Returns all data from the study in the nested form:
         {
             <event_name>: {            # event data
@@ -521,7 +521,8 @@ class REDCapStudy:
         # This is made more difficult by the fact that the REDCap project
         # metadata uniformly categorizes fields by their instrument name, but
         # the records API doesn't report the instrument name for records that
-        # come from instruments that aren't repeating.
+        # come from instruments that aren't repeating. Maybe that will change,
+        # but this code would probably keep working anyway. - Nov 2019
 
         errors = defaultdict(list)
         all_subjects = set()
@@ -547,7 +548,7 @@ class REDCapStudy:
                     )
 
                 mapped_value = value
-                if field in selector_map:
+                if (not raw_selectors) and (field in selector_map):
                     if value not in selector_map[field]:  # obsolete
                         if value in selector_map[field].values():
                             _record_error("choice value as text")
