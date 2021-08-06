@@ -514,15 +514,15 @@ class REDCapStudy:
         # differentiate between the two, so we should defer translating headers
         # until the very end.
         #
-        # Unfortunately there's no way to independently ask for translated
-        # selector values (e.g. "Female" instead of "1") without also asking
-        # for translated headers, so asking for raw means doing a lot more work
-        # selectively digging through project metadata to map the selectors.
-        # This is made more difficult by the fact that the REDCap project
-        # metadata uniformly categorizes fields by their instrument name, but
-        # the records API doesn't report the instrument name for records that
-        # come from instruments that aren't repeating. Maybe that will change,
-        # but this code would probably keep working anyway. - Nov 2019
+        # [Nov 2019] Unfortunately there's no way to independently ask for
+        # translated selector values (e.g. "Female" instead of "1") without
+        # also asking for translated headers, so asking for raw means doing a
+        # lot more work selectively digging through project metadata to map the
+        # selectors. This is made more difficult by the fact that the REDCap
+        # project metadata uniformly categorizes fields by their instrument
+        # name, but the records API doesn't report the instrument name for
+        # records that come from instruments that aren't repeating. Maybe that
+        # will change, but this code would probably keep working anyway.
 
         errors = defaultdict(list)
         all_subjects = set()
@@ -535,7 +535,7 @@ class REDCapStudy:
             data_access_groups=True,
         ):
 
-            def _check_error_map_add():
+            def _check_errors_and_store_mapped():
                 def _record_error(what):
                     errors[what].append(
                         {
@@ -548,7 +548,11 @@ class REDCapStudy:
                     )
 
                 mapped_value = value
-                if (not raw_selectors) and (field in selector_map):
+                if (
+                    (not raw_selectors)
+                    and (field in selector_map)
+                    and (value != "")
+                ):
                     if value not in selector_map[field]:  # obsolete
                         if value in selector_map[field].values():
                             _record_error("choice value as text")
@@ -559,7 +563,9 @@ class REDCapStudy:
                 if event not in event_forms:  # obsolete
                     _record_error("event is missing")
                     return False
-                if field not in field_forms:  # obsolete
+                if field not in (
+                    {"redcap_data_access_group"} | set(field_forms)
+                ):  # obsolete
                     _record_error("field not in a form")
                     return False
                 if form not in event_forms[event]:  # obsolete
@@ -582,6 +588,10 @@ class REDCapStudy:
             # Note that 1 was an int and 2 was a str.
             # The API can also return "" or nothing at all.
             instance = str(r.pop("redcap_repeat_instance", "1") or "1")
+
+            # This is only populated for repeat instruments, because the REDCap
+            # motto is "Why do the same thing all the time when we could do
+            # something different every time?"
             repeat_form = r.pop("redcap_repeat_instrument", None)
 
             if debug_type == "eav":
@@ -592,7 +602,7 @@ class REDCapStudy:
                 value = r["value"]
                 form = repeat_form or field_forms.get(field)
 
-                if not _check_error_map_add():
+                if not _check_errors_and_store_mapped():
                     continue
             else:
                 subject = r.pop(record_id_field)
@@ -613,11 +623,17 @@ class REDCapStudy:
                             value = real_value
                             form = field_forms.get(field)
 
-                    if value == "":  # regular field not populated
+                    if (value == "") and (form not in event_forms[event]):
+                        continue  # field not present
+
+                    if not _check_errors_and_store_mapped():
                         continue
 
-                    if not _check_error_map_add():
-                        continue
+        # Should unused forms and fields be represented too for completeness?
+        # Let's mark them as present and empty but incomplete.
+        form_fields = defaultdict(set)
+        for field, form in field_forms.items():
+            form_fields[form].add(field)
 
         for event_name, event_form_names in event_forms.items():
             for form_name in event_form_names:
@@ -625,9 +641,11 @@ class REDCapStudy:
                     if not store[event_name][form_name][subject]:
                         store[event_name][form_name][subject] = {"1": dict()}
                     for i, iv in store[event_name][form_name][subject].items():
-                        if f"{form_name}_complete" not in iv:
-                            store[event_name][form_name][subject][i][
-                                f"{form_name}_complete"
-                            ] = {"Incomplete"}
+                        for field in form_fields[form_name]:
+                            if field not in iv:
+                                if field == f"{form_name}_complete":
+                                    iv[field] = {"Incomplete"}
+                                else:
+                                    iv[field] = {""}
 
         return _undefault_dict(store), _undefault_dict(errors)
