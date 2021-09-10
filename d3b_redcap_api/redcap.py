@@ -23,7 +23,7 @@ class REDCapError(Exception):
 # decorators. It needs to be completely unambiguous without inspecting the
 # implementation that the data is somewhere else and that setting anything
 # has serious consequences. This is an interface for manipulating REDCap with
-# project administrative privilege, not just not just some data container.
+# project administrative privilege, not just some data container.
 # - Avi
 class REDCapStudy:
     def __init__(self, api_url, api_token):
