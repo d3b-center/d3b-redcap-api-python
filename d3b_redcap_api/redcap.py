@@ -549,21 +549,20 @@ class REDCapStudy:
 
                 mapped_value = value
                 if (not raw_selectors) and (field in selector_map):
-                    if value not in selector_map[field]:  # obsolete
+                    if value not in selector_map[field]:
+                        # Is this code the right place for data error checks?
+                        # Consider removing this.
                         if value in selector_map[field].values():
                             _record_error("choice value as text")
                         else:
                             _record_error("choice value is missing")
                         return False
                     mapped_value = selector_map[field][value]
-                if event not in event_forms:  # obsolete
-                    _record_error("event is missing")
+                if field not in field_forms:
                     return False
-                if field not in field_forms:  # obsolete
-                    _record_error("field not in a form")
+                if event not in event_forms:
                     return False
-                if form not in event_forms[event]:  # obsolete
-                    _record_error("form not in given event")
+                if form not in event_forms[event]:
                     return False
                 if field != record_id_field:
                     if field == f"{form}_complete":
@@ -592,8 +591,7 @@ class REDCapStudy:
                 value = r["value"]
                 form = repeat_form or field_forms.get(field)
 
-                if not _check_error_map_add():
-                    continue
+                _check_error_map_add()
             else:
                 subject = r.pop(record_id_field)
                 all_subjects.add(subject)
@@ -616,8 +614,7 @@ class REDCapStudy:
                     if value == "":  # regular field not populated
                         continue
 
-                    if not _check_error_map_add():
-                        continue
+                    _check_error_map_add()
 
         for event_name, event_form_names in event_forms.items():
             for form_name in event_form_names:
